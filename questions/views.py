@@ -23,6 +23,7 @@ def addShortQuestion(request):
             if form.is_valid():
                 question = form.save(commit=False)
                 question.save()
+                return redirect("/")
         except Exception as e:
             print(e)
             raise
@@ -37,6 +38,7 @@ def addEssayQuestion(request):
             if form.is_valid():
                 question = form.save(commit=False)
                 question.save()
+                return redirect("/")
         except Exception as e:
             print(e)
             raise
@@ -44,17 +46,32 @@ def addEssayQuestion(request):
     return render(request, 'add_essay_question.html', context)
 
 def addMCQuestion(request):
-    form = AddMCQuestion()
-    form2 = AddChoices()
-    if request.method == "POST":
+    form = AddMCQuestion(prefix='MCQ')
+    form2 = AddChoices(prefix='choice')
+    if request.method == 'POST':
         try:
-            form = AddMCQuestion(request.POST)
-            form2 = AddChoices(request.POST)
+            form = AddMCQuestion(request.POST, prefix='MCQ')
             if form.is_valid():
                 question = form.save(commit=False)
-                choice = form2.save(commit=False)
                 question.save()
+                return redirect("/")
+            else:
+                form = AddMCQuestion(prefix='MCQ')
+        except Exception as e:
+            print(e)
+            raise
+    if request.method == 'POST' and not form.is_valid():
+        try:
+            form2 = AddChoices(request.POST, prefix='choice')
+            form = AddMCQuestion(prefix='MCQ')
+            if form2.is_valid():
+                choice = form2.save(commit=False)
                 choice.save()
+                form2 = AddChoices()
+                return redirect("/add-mcq")
+            else:
+                form2 = AddChoices(prefix='choice')
+                return redirect("/add-mcq")
         except Exception as e:
             print(e)
             raise
@@ -66,13 +83,14 @@ def addMCQuestion(request):
 
 def shortQuestionPage(request, id):
     short_response_form = ShortResponseForm()
-    if request.method == "POST":
+    if request.mthod == "POST":
         try:
             short_response_form = ShortResponseForm(request.POST)
             if short_response_form.is_valid():
                 short_response = short_response_form.save(commit=False)
                 short_response.question = ShortQuestion(id=id)
                 short_response.save()
+                return redirect("/")
         except Exception as e:
             print(e)
             raise
@@ -92,6 +110,7 @@ def essayQuestionPage(request, id):
                 essay_response = essay_response_form.save(commit=False)
                 essay_response.question = EssayQuestion(id=id)
                 essay_response.save()
+                return redirect("/")
         except Exception as e:
             print(e)
             raise
