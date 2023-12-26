@@ -1,3 +1,5 @@
+import random
+
 from django.shortcuts import render, redirect
 from .models import *
 from .form import *
@@ -46,44 +48,75 @@ def addEssayQuestion(request):
     return render(request, 'add_essay_question.html', context)
 
 def addMCQuestion(request):
-    form = AddMCQuestion(prefix='MCQ')
-    form2 = AddChoices(prefix='choice')
-    if request.method == 'POST':
+    # form = AddMCQuestion(prefix='MCQ')
+    # form2 = AddChoices(prefix='choice')
+    # if request.method == 'POST':
+    #     try:
+    #         form = AddMCQuestion(request.POST, prefix='MCQ')
+    #         if form.is_valid():
+    #             question = form.save(commit=False)
+    #             question.save()
+    #             return redirect("/")
+    #         else:
+    #             form = AddMCQuestion(prefix='MCQ')
+    #     except Exception as e:
+    #         print(e)
+    #         raise
+    # if request.method == 'POST' and not form.is_valid():
+    #     try:
+    #         form2 = AddChoices(request.POST, prefix='choice')
+    #         form = AddMCQuestion(prefix='MCQ')
+    #         if form2.is_valid():
+    #             choice = form2.save(commit=False)
+    #             choice.mcq = MultiChoiceQuestion(id=id)
+    #             choice.save()
+    #             form2 = AddChoices()
+    #             return redirect("/add-mcq")
+    #         else:
+    #             form2 = AddChoices(prefix='choice')
+    #             return redirect("/add-mcq")
+    #     except Exception as e:
+    #         print(e)
+    #         raise
+    form = AddMCQuestion()
+    if request.method == "POST":
         try:
-            form = AddMCQuestion(request.POST, prefix='MCQ')
+            form = AddMCQuestion(request.POST)
             if form.is_valid():
                 question = form.save(commit=False)
                 question.save()
-                return redirect("/")
-            else:
-                form = AddMCQuestion(prefix='MCQ')
-        except Exception as e:
-            print(e)
-            raise
-    if request.method == 'POST' and not form.is_valid():
-        try:
-            form2 = AddChoices(request.POST, prefix='choice')
-            form = AddMCQuestion(prefix='MCQ')
-            if form2.is_valid():
-                choice = form2.save(commit=False)
-                choice.save()
-                form2 = AddChoices()
-                return redirect("/add-mcq")
-            else:
-                form2 = AddChoices(prefix='choice')
-                return redirect("/add-mcq")
+                return redirect('/add_mcq_add_choice/'+str(question.id))
         except Exception as e:
             print(e)
             raise
     context = {
         'form': form,
-        'form2': form2,
     }
     return render(request, 'add_mcq.html', context)
 
+def addChoice(request, id):
+    choices = Choices.objects.filter(mcq=id)
+    multiChoiceQuestions = MultiChoiceQuestion.objects.get(id=id)
+    form = AddChoices()
+    if request.method == "POST":
+        form = AddChoices(request.POST)
+        if form.is_valid():
+            choice = form.save(commit=False)
+            choice.mcq = MultiChoiceQuestion(id=id)
+            choice.save()
+            form = AddChoices()
+            return redirect("/add_mcq_add_choice/"+str(id))
+    context = {
+        'form': form,
+        'multiChoiceQuestions': multiChoiceQuestions,
+        'choices': choices
+    }
+    print(choices)
+    return render(request, 'add_mcq_add_choice.html', context)
+
 def shortQuestionPage(request, id):
     short_response_form = ShortResponseForm()
-    if request.mthod == "POST":
+    if request == "POST":
         try:
             short_response_form = ShortResponseForm(request.POST)
             if short_response_form.is_valid():
@@ -121,8 +154,10 @@ def essayQuestionPage(request, id):
     }
     return render(request, 'EssayQuestion.html', context)
 def MCQuestionPage(request, id):
+    choices = Choices.objects.filter(mcq=id)
     mcq_question = MultiChoiceQuestion.objects.get(id=id)
     context = {
-        'mcq_question': mcq_question
+        'mcq_question': mcq_question,
+        'choices': choices
     }
     return render(request, 'MCQ.html', context)

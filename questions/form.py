@@ -13,7 +13,7 @@ class AddEssayQuestion(forms.ModelForm):
 class AddMCQuestion(forms.ModelForm):
     class Meta:
         model = MultiChoiceQuestion
-        fields = ['question', 'choices']
+        fields = ['question']
 
 class AddChoices(forms.ModelForm):
     class Meta:

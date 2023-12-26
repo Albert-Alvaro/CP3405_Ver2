@@ -3,7 +3,7 @@
 {% block content %}
 <div class="page-essay-question">
     <h2 class="essay-question-title">{{essay_question.question}}</h2>
-    <p class="question-date">Created At: {{short_question.created_at}}</p>
+    <p class="question-date">Created At: {{essay_question.created_at}}</p>
 
     <form method="POST" action="" class="response-form">
         {% csrf_token %}

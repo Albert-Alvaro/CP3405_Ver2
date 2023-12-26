@@ -1,17 +1,10 @@
 from django.db import models
 
 # Create your models here.
-class Choices(models.Model):
-    choice = models.CharField(max_length=5000)
-
-    def __str__(self):
-        return self.choice
-
 class MultiChoiceQuestion(models.Model):
     question = models.CharField(max_length=10000)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-    choices = models.ManyToManyField(Choices, related_name="choices")
 
     def __str__(self):
         return self.question
@@ -43,3 +36,10 @@ class ShortResponse(models.Model):
     body = models.TextField(null=False)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+
+class Choices(models.Model):
+    mcq = models.ForeignKey(MultiChoiceQuestion, null=True, on_delete=models.CASCADE)
+    choice = models.CharField(max_length=5000)
+
+    def __str__(self):
+        return self.choice
