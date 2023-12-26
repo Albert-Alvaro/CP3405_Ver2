@@ -1,7 +1,7 @@
 html,
 body {
     font-family: Arial;
-    background-color: #7ef29d;
+    background-color: #90E4C1;
 }
 
 *, *::after, *::before{
@@ -91,6 +91,10 @@ ul{
     font-weight:900;
 }
 
+.page-essay-question .essay-question-title{
+    word-wrap: break-word;
+}
+
 .question-items{
     margin-bottom: 20px;
 }
@@ -103,6 +107,7 @@ ul{
 .question-item-title{
     color: black;
     font-size: 18px;
+    word-wrap: break-word;
     font-weight: 800;
     margin: 0;
 }
@@ -141,3 +146,53 @@ ul{
   margin-bottom: 6px;
   border: 1px solid lightgray;
   min-height: 40px;
+
+.modal-button{
+  display: block;
+  width: 120px;
+  height: 40px;
+  border: none;
+  border-radius: 20px;
+  background-color: black;
+  color: white;
+  margin: 0 auto;
+  cursor: pointer;
+}
+
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  padding-top: 100px; /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content */
+.modal-content {
+  background-color: #fefefe;
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+}
+
+/* The Close Button */
+.close {
+  color: #aaaaaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}

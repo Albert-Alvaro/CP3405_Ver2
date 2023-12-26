@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .models import *
 from .form import *
 
@@ -64,5 +64,36 @@ def addMCQuestion(request):
     }
     return render(request, 'add_mcq.html', context)
 
-def questionPage(request, id):
-    return None
+def shortQuestionPage(request, id):
+    short_response_form = ShortResponseForm()
+    if request.method == "POST":
+        try:
+            short_response_form = ShortResponseForm(request.POST)
+            if short_response_form.is_valid():
+                short_response = short_response_form.save(commit=False)
+                short_response.question = ShortQuestion(id=id)
+                short_response.save()
+        except Exception as e:
+            print(e)
+            raise
+
+    short_question = ShortQuestion.objects.get(id=id)
+    context = {
+        'short_question': short_question,
+        'short_response_form': short_response_form
+    }
+    return render(request, 'ShortQuestion.html', context)
+def essayQuestionPage(request, id):
+    essay_response_form = EssayResponseForm()
+    essay_question = EssayQuestion.objects.get(id=id)
+    context = {
+        'essay_question': essay_question,
+        'essay_response_form': essay_response_form
+    }
+    return render(request, 'EssayQuestion.html', context)
+def MCQuestionPage(request, id):
+    mcq_question = MultiChoiceQuestion.objects.get(id=id)
+    context = {
+        'mcq_question': mcq_question
+    }
+    return render(request, 'MCQ.html', context)

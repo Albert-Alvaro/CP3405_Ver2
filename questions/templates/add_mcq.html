@@ -16,13 +16,12 @@
         <input type="submit" value="Add" class="submit-button">
     </form>
     <form method="POST" action="" class="add-choice">
-            {% csrf_token %}
-            <div class="field-wrapper">
-                <label for="{{form2.choice.id_for_label}}">Add Choice</label>
-                {{form2.choice}}
-            </div>
-            <input type="submit" value="Add" class="submit-button">
+        {% csrf_token %}
+                    <div class="field-wrapper">
+                        <label for="{{form2.choice.id_for_label}}">Add Choice</label>
+                        {{form2.choice}}
+                    </div>
+        <input type="submit" value="Add" class="submit-button">
     </form>
 </div>
-
 {% endblock %}

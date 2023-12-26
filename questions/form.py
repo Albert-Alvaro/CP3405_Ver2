@@ -19,3 +19,13 @@ class AddChoices(forms.ModelForm):
     class Meta:
         model = Choices
         fields = ['choice']
+
+class ShortResponseForm(forms.ModelForm):
+    class Meta:
+        model = ShortResponse
+        fields = ['body']
+
+class EssayResponseForm(forms.ModelForm):
+    class Meta:
+        model = EssayResponse
+        fields = ['body']

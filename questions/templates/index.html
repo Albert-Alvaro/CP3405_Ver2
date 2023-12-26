@@ -5,7 +5,7 @@
 <h1 class="title">Short Questions</h1>
 {% for  question in shortQuestions %}
 <div class = "question-items">
-    <a href="{% url 'question' question.id %}">
+    <a href="{% url 'short-question' question.id %}">
         <p class="question-item-title">
             {{question.question}}
         </p>
@@ -19,7 +19,7 @@
 <h1 class="title">Essay Questions</h1>
 {% for  question in essayQuestions %}
 <div class = "question-items">
-    <a href="{% url 'question' question.id %}">
+    <a href="{% url 'essay-question' question.id %}">
         <p class="question-item-title">
             {{question.question}}
         </p>
@@ -33,7 +33,7 @@
 <h1 class="title">Multiple Choice Questions</h1>
 {% for  question in multiChoiceQuestions %}
 <div class = "question-items">
-    <a href="{% url 'question' question.id %}">
+    <a href="{% url 'mcq-question' question.id %}">
         <p class="question-item-title">
             {{question.question}}
         </p>

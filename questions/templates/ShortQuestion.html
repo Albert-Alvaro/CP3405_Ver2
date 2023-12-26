@@ -1,0 +1,17 @@
+{%  extends 'layouts/page.html' %}
+
+{% block content %}
+<div class="page-short-question">
+    <h2 class="question-title">{{short_question.question}}</h2>
+    <p class="question-date">Created At: {{short_question.created_at}}</p>
+
+    <form method="POST" action="" class="response-form">
+        {% csrf_token %}
+        <div class="field-wrapper">
+            <label for="{{short_response_form.body.id_for_label}}"> Response: </label>
+            {{short_response_form.body}}
+        </div>
+        <input type="submit" value="Send" class="submit-button">
+    </form>
+</div>
+{% endblock %}
