@@ -1,3 +1,40 @@
-<h1>
-    Hello {{title}}
-</h1>
+<h1>Short Questions</h1>
+{% for  question in shortQuestions %}
+<div class = "short-question-items">
+    <a href="{% url 'question' question.id %}">
+        <p class="short-question-item-title">
+            {{question.question}}
+        </p>
+        <p class="short-question-created-at">
+            {{question.create_at}}
+        </p>
+    </a>
+</div>
+{% endfor %}
+<br>
+<h1>Essay Questions</h1>
+{% for  question in essayQuestions %}
+<div class = "short-question-items">
+    <a href="{% url 'question' question.id %}">
+        <p class="short-question-item-title">
+            {{question.question}}
+        </p>
+        <p class="short-question-created-at">
+            {{question.create_at}}
+        </p>
+    </a>
+</div>
+{% endfor %}
+<h1>Multiple Choice Questions</h1>
+{% for  question in multiChoiceQuestions %}
+<div class = "short-question-items">
+    <a href="{% url 'question' question.id %}">
+        <p class="short-question-item-title">
+            {{question.question}}
+        </p>
+        <p class="short-question-created-at">
+            {{question.create_at}}
+        </p>
+    </a>
+</div>
+{% endfor %}
