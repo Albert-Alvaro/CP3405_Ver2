@@ -1,40 +1,47 @@
-<h1>Short Questions</h1>
+{% extends 'layouts/page.html' %}
+
+{% block content %}
+<div class="page">
+<h1 class="title">Short Questions</h1>
 {% for  question in shortQuestions %}
-<div class = "short-question-items">
+<div class = "question-items">
     <a href="{% url 'question' question.id %}">
-        <p class="short-question-item-title">
+        <p class="question-item-title">
             {{question.question}}
         </p>
-        <p class="short-question-created-at">
-            {{question.create_at}}
+        <p class="question-created-at">
+            {{question.created_at}}
         </p>
     </a>
 </div>
 {% endfor %}
-<br>
-<h1>Essay Questions</h1>
+
+<h1 class="title">Essay Questions</h1>
 {% for  question in essayQuestions %}
-<div class = "short-question-items">
+<div class = "question-items">
     <a href="{% url 'question' question.id %}">
-        <p class="short-question-item-title">
+        <p class="question-item-title">
             {{question.question}}
         </p>
-        <p class="short-question-created-at">
-            {{question.create_at}}
+        <p class="question-created-at">
+            {{question.created_at}}
         </p>
     </a>
 </div>
 {% endfor %}
-<h1>Multiple Choice Questions</h1>
+
+<h1 class="title">Multiple Choice Questions</h1>
 {% for  question in multiChoiceQuestions %}
-<div class = "short-question-items">
+<div class = "question-items">
     <a href="{% url 'question' question.id %}">
-        <p class="short-question-item-title">
+        <p class="question-item-title">
             {{question.question}}
         </p>
-        <p class="short-question-created-at">
-            {{question.create_at}}
+        <p class="question-created-at">
+            {{question.created_at}}
         </p>
     </a>
 </div>
 {% endfor %}
+</div>
+{% endblock %}
