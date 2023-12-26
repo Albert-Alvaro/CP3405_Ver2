@@ -5,9 +5,10 @@
     <h1 class="title">Add Short Question</h1>
     <form method="POST" action="" class="add-short-question-form">
         {%  csrf_token %}
-<!--        <div class="field-wrapper">-->
-<!--            <label for="{{}}">Short Question</label>-->
-<!--        </div>-->
+        <div class="field-wrapper">
+            <label for="{{form.question.id_for_label}}">Short Question</label>
+            {{form.question}}
+        </div>
         <input type="submit" value="Add" class="submit-button">
     </form>
 </div>

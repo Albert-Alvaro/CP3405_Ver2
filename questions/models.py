@@ -6,7 +6,6 @@ class Choices(models.Model):
 
 class MultiChoiceQuestion(models.Model):
     question = models.CharField(max_length=10000)
-    required = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     choices = models.ManyToManyField(Choices, related_name="choices")

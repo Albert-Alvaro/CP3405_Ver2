@@ -111,3 +111,33 @@ ul{
     color: lightgray;
     margin: 0;
 }
+
+.field-wrapper {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+}
+
+.submit-button {
+  display: block;
+  width: 120px;
+  height: 40px;
+  border: none;
+  border-radius: 20px;
+  background-color: black;
+  color: white;
+  margin: 0 auto;
+  cursor: pointer;
+}
+
+.field-wrapper label {
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+
+.field-wrapper input {
+  margin-bottom: 6px;
+  border: 1px solid lightgray;
+  min-height: 40px;

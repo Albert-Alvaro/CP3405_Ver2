@@ -1,0 +1,28 @@
+{%  extends 'layouts/page.html' %}
+
+{% block content %}
+<div class="add-question-page">
+    <h1 class="title">Add Multiple Choice Question</h1>
+    <form method="POST" action="" class="add-mcq-question-form">
+        {%  csrf_token %}
+        <div class="field-wrapper">
+            <label for="{{form.question.id_for_label}}">Multiple Choice Question</label>
+            {{form.question}}
+        </div>
+        <div class="field-wrapper">
+            <label for="{{form.choices.id_for_label}}">Choices</label>
+            {{form.choices}}
+        </div>
+        <input type="submit" value="Add" class="submit-button">
+    </form>
+    <form method="POST" action="" class="add-choice">
+            {% csrf_token %}
+            <div class="field-wrapper">
+                <label for="{{form2.choice.id_for_label}}">Add Choice</label>
+                {{form2.choice}}
+            </div>
+            <input type="submit" value="Add" class="submit-button">
+    </form>
+</div>
+
+{% endblock %}

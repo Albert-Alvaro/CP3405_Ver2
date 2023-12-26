@@ -7,9 +7,9 @@
     <div class="dropdown">
         <button class="dropbtn">Add Question</button>
             <div class="dropdown-content">
-                <a href="#">Short Question</a>
-                <a href="#">Essay Question</a>
-                <a href="#">Multiple Choice Question</a>
+                <a href="{% url 'add-short-question' %}">Short Question</a>
+                <a href="{% url 'add-essay-question' %}">Essay Question</a>
+                <a href="{% url 'add-mcq' %}">Multiple Choice Question</a>
             </div>
     </div>
 </nav>

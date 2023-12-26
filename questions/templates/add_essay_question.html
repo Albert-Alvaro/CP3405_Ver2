@@ -1,0 +1,16 @@
+{%  extends 'layouts/page.html' %}
+
+{% block content %}
+<div class="add-question-page">
+    <h1 class="title">Add Essay Question</h1>
+    <form method="POST" action="" class="add-essay-question-form">
+        {%  csrf_token %}
+        <div class="field-wrapper">
+            <label for="{{form.question.id_for_label}}">Essay Question</label>
+            {{form.question}}
+        </div>
+        <input type="submit" value="Add" class="submit-button">
+    </form>
+</div>
+
+{% endblock %}
