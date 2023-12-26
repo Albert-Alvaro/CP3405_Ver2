@@ -16,12 +16,28 @@
         <input type="submit" value="Add" class="submit-button">
     </form>
     <form method="POST" action="" class="add-choice">
-        {% csrf_token %}
+            {% csrf_token %}
                     <div class="field-wrapper">
                         <label for="{{form2.choice.id_for_label}}">Add Choice</label>
                         {{form2.choice}}
                     </div>
-        <input type="submit" value="Add" class="submit-button">
+                <input type="submit" value="Add" class="submit-button">
     </form>
+    <button id="myButton"> Add Choice</button>
+    <div id="myPopup" class="popup">
+        <div class="popup-content">
+             <form method="POST" action="" class="add-choice">
+                {% csrf_token %}
+                    <div class="field-wrapper">
+                        <label for="{{form2.choice.id_for_label}}">Add Choice</label>
+                        {{form2.choice}}
+                    </div>
+                <input type="submit" value="Add" class="submit-button">
+            </form>
+            <button id="closePopup">
+                  Close
+              </button>
+        </div>
+    </div>
 </div>
 {% endblock %}

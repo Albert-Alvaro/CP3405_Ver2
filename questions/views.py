@@ -85,6 +85,16 @@ def shortQuestionPage(request, id):
     return render(request, 'ShortQuestion.html', context)
 def essayQuestionPage(request, id):
     essay_response_form = EssayResponseForm()
+    if request.method == "POST":
+        try:
+            essay_response_form = EssayResponseForm(request.POST)
+            if essay_response_form.is_valid():
+                essay_response = essay_response_form.save(commit=False)
+                essay_response.question = EssayQuestion(id=id)
+                essay_response.save()
+        except Exception as e:
+            print(e)
+            raise
     essay_question = EssayQuestion.objects.get(id=id)
     context = {
         'essay_question': essay_question,
