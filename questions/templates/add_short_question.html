@@ -1,0 +1,15 @@
+{%  extends 'layouts/page.html' %}
+
+{% block content %}
+<div class="add-question-page">
+    <h1 class="title">Add Short Question</h1>
+    <form method="POST" action="" class="add-short-question-form">
+        {%  csrf_token %}
+<!--        <div class="field-wrapper">-->
+<!--            <label for="{{}}">Short Question</label>-->
+<!--        </div>-->
+        <input type="submit" value="Add" class="submit-button">
+    </form>
+</div>
+
+{% endblock %}
