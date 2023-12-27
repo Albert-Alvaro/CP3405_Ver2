@@ -86,6 +86,7 @@ def addChoice(request, id):
     return render(request, 'add_mcq_add_choice.html', context)
 
 def shortQuestionPage(request, id):
+    category = Question.objects.all()
     short_response_form = ShortResponseForm()
     if request == "POST":
         try:
@@ -101,7 +102,8 @@ def shortQuestionPage(request, id):
     short_question = ShortQuestion.objects.get(id=id)
     context = {
         'short_question': short_question,
-        'short_response_form': short_response_form
+        'short_response_form': short_response_form,
+        'category': category
     }
     return render(request, 'ShortQuestion.html', context)
 
@@ -129,6 +131,7 @@ def deleteChoice_amcq(request, id):
     return redirect("/add_mcq_add_choice/"+str(choice.mcq.id))
 
 def essayQuestionPage(request, id):
+    category = Question.objects.all()
     essay_response_form = EssayResponseForm()
     if request.method == "POST":
         try:
@@ -144,10 +147,12 @@ def essayQuestionPage(request, id):
     essay_question = EssayQuestion.objects.get(id=id)
     context = {
         'essay_question': essay_question,
-        'essay_response_form': essay_response_form
+        'essay_response_form': essay_response_form,
+        'category': category
     }
     return render(request, 'EssayQuestion.html', context)
 def MCQuestionPage(request, id):
+    category = Question.objects.all()
     mcq_question = MultiChoiceQuestion.objects.get(id=id)
     choices = Choices.objects.filter(mcq=id)
     form = AddChoices()
@@ -162,7 +167,8 @@ def MCQuestionPage(request, id):
     context = {
         'mcq_question': mcq_question,
         'choices': choices,
-        'form': form
+        'form': form,
+        'category': category
     }
     return render(request, 'MCQ.html', context)
 
@@ -214,3 +220,17 @@ def addMCQToCategory(request, id, id2):
     question = MultiChoiceQuestion.objects.filter(id=id2).update(category=id)
 
     return redirect("/create-category-add-question/" + str(category.id))
+
+def changeShortQuestionCat(request, id, id2):
+    category = Question.objects.get(id=id2)
+    short_question = ShortQuestion.objects.filter(id=id).update(category=id2)
+    return redirect("/short-question/"+str(id))
+def changeEssayQuestionCat(request, id, id2):
+    category = Question.objects.get(id=id2)
+    essay_question = EssayQuestion.objects.filter(id=id).update(category=id2)
+    return redirect("/essay-question/"+str(id))
+def changeMCQCat(request, id, id2):
+    category = Question.objects.get(id=id2)
+    mcq_question = MultiChoiceQuestion.objects.filter(id=id).update(category=id2)
+
+    return redirect("/mcq-question/"+str(id))

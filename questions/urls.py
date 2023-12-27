@@ -24,4 +24,7 @@ urlpatterns = [
          name="add-short-question-to-category"),
     path('add-mcq-to-category/<int:id>/<int:id2>', views.addMCQToCategory, name="add-mcq-to-category"),
     path('image_upload', views.addEssayQuestion, name='image_upload'),
+    path('change-short-question-cat/<int:id>/<int:id2>', views.changeShortQuestionCat, name='change-short-question-cat'),
+    path('change-essay-question-cat/<int:id>/<int:id2>', views.changeEssayQuestionCat, name='change-essay-question-cat'),
+    path('change-mcq-cat/<int:id>/<int:id2>', views.changeMCQCat, name='change-mcq-cat'),
 ]
