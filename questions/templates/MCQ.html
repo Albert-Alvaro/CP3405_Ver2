@@ -99,9 +99,9 @@ ol {
     <h2 class="mcq-question-title">{{mcq_question.question}}</h2>
     <p class="question-date">Created At: {{mcq_question.created_at}}</p>
     <p class="question-category">Category: {{mcq_question.category}}</p>
-    <div class="dropdown">
-        <button class="dropbtn">Categories</button>
-            <div class="dropdown-content">
+    <div class="dropdown2">
+        <button class="dropbtn2">Categories</button>
+            <div class="dropdown-content2">
                 {% for  category in category %}
                 <div class = "question-items">
                     <a href="{% url 'change-mcq-cat' mcq_question.id category.id %}">

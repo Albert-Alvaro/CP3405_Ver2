@@ -2,6 +2,7 @@
 
 {% block content %}
 <style>
+
     .submit-button,
     .add-choice-button{
         display: right;
@@ -88,9 +89,9 @@
                 </div>
             {% endfor %}
         </div>
-    <div class="dropdown">
-        <button class="dropbtn">Short Answer Questions</button>
-            <div class="dropdown-content">
+    <div class="dropdown2">
+        <button class="dropbtn2">Short Answer Questions</button>
+            <div class="dropdown-content2">
                 {% for  question in shortQuestions %}
                 <div class = "question-items">
                     <a href="{% url 'add-short-question-to-category' category.id question.id %}">
@@ -102,9 +103,9 @@
                 {% endfor %}
             </div>
     </div>
-    <div class="dropdown">
-        <button class="dropbtn">Essay Questions</button>
-            <div class="dropdown-content">
+    <div class="dropdown2">
+        <button class="dropbtn2">Essay Questions</button>
+            <div class="dropdown-content2">
                 {% for  question in essayQuestions %}
                 <div class = "question-items">
                     <a href="{% url 'add-essay-question-to-category' category.id question.id %}">
@@ -116,11 +117,11 @@
                 {% endfor %}
             </div>
     </div>
-    <div class="dropdown">
-        <button class="dropbtn">Multiple Choice Questions</button>
-            <div class="dropdown-content">
+    <div class="dropdown2">
+        <button class="dropbtn2">Multiple Choice Questions</button>
+            <div class="dropdown-content2">
                 {% for  question in multiChoiceQuestions %}
-                <div class = "question-items">
+                <div class = "question-items2">
                     <a href="{% url 'add-mcq-to-category' category.id question.id %}">
                         <p class="question-item-title">
                         {{question.question}}

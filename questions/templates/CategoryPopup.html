@@ -1,0 +1,53 @@
+{% extends 'layouts/page.html' %}
+
+{% block content %}
+<style>
+        ol {
+            list-style:square;
+            padding: 0 ;
+            margin: 0;
+            margin-left: 30px;
+            font-size: 20px;
+        }
+        .back-button{
+        display: right;
+        justify-content: right;
+            width: 100px;
+            height: 40px;
+            border: none;
+            border-radius: 20px;
+            background-color: black;
+            color: white;
+            margin: 10px auto;
+            cursor: pointer;
+        }
+</style>
+
+<h2>Questions in Category {{category.category}}: </h2>
+            {% for  question in shortQuestionsCat %}
+                <div class = "question-items">
+                        <ol>
+                            <li>{{question.question}}</li>
+                        </ol>
+                </div>
+            {% endfor %}
+            {% for  question in essayQuestionsCat %}
+                <div class = "question-items">
+                        <ol>
+                            <li>{{question.question}}</li>
+                        </ol>
+                </div>
+            {% endfor %}
+            {% for  question in multiChoiceQuestionsCat %}
+                <div class = "question-items">
+                        <ol>
+                            <li>{{question.question}}</li>
+                        </ol>
+                </div>
+            {% endfor %}
+
+<a href="{% url 'category-page' %}">
+    <button class="back-button">Back</button>
+</a>
+
+{% endblock %}

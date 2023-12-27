@@ -234,3 +234,31 @@ def changeMCQCat(request, id, id2):
     mcq_question = MultiChoiceQuestion.objects.filter(id=id).update(category=id2)
 
     return redirect("/mcq-question/"+str(id))
+
+def categoryPage(request):
+    category = Question.objects.all()
+    context= {
+        'category': category,
+    }
+    return render(request, 'Category.html', context)
+
+def deleteCategory(request, id):
+    category = Question.objects.get(id=id)
+    question = ShortQuestion.objects.filter(category=id).update(category='')
+    question2 = EssayQuestion.objects.filter(category=id).update(category='')
+    question3 = MultiChoiceQuestion.objects.filter(category=id).update(category='')
+    category.delete()
+    return redirect("/category-page")
+
+def categoryPopup(request, id):
+    category = Question.objects.get(id=id)
+    shortQuestionsCat = ShortQuestion.objects.filter(category=id)
+    essayQuestionsCat = EssayQuestion.objects.filter(category=id)
+    multiChoiceQuestionsCat = MultiChoiceQuestion.objects.filter(category=id)
+    context ={
+        'shortQuestionsCat': shortQuestionsCat,
+        'essayQuestionsCat': essayQuestionsCat,
+        'multiChoiceQuestionsCat': multiChoiceQuestionsCat,
+        'category': category,
+    }
+    return render(request, 'CategoryPopup.html', context)

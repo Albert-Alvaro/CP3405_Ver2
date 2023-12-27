@@ -1,0 +1,36 @@
+{% extends 'layouts/page.html' %}
+
+{% block content %}
+<style>
+    ol {
+    list-style:square;
+    padding: 0 ;
+    margin: 0;
+    margin-left: 30px;
+     font-size: 30px;
+}
+    a {
+    text-decoration: none;
+    color: black;
+    }
+</style>
+<div class="page">
+<h1 class="title">Categories</h1>
+{% for category in category %}
+<div class = "question-items">
+        <ol>
+            <li>
+            <a href="{% url 'category-popup' category.id %}">
+                {{category.category}}
+            </a>
+            </li>
+        </ol>
+
+    <a href="{% url 'delete-category' category.id %}">
+        <button type="button" class="delete-button">Delete</button>
+    </a>
+</div>
+{% endfor %}
+</div>
+
+{% endblock %}

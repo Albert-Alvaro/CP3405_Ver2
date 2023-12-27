@@ -27,4 +27,7 @@ urlpatterns = [
     path('change-short-question-cat/<int:id>/<int:id2>', views.changeShortQuestionCat, name='change-short-question-cat'),
     path('change-essay-question-cat/<int:id>/<int:id2>', views.changeEssayQuestionCat, name='change-essay-question-cat'),
     path('change-mcq-cat/<int:id>/<int:id2>', views.changeMCQCat, name='change-mcq-cat'),
+    path('category-page', views.categoryPage, name="category-page"),
+    path('delete-category/<int:id>', views.deleteCategory, name="delete-category"),
+    path('category-popup/<int:id>', views.categoryPopup, name="category-popup"),
 ]
