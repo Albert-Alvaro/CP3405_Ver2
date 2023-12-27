@@ -12,6 +12,9 @@
         <p class="question-created-at">
             {{question.created_at}}
         </p>
+        <p class="question-category">
+            Category: {{question.category}}
+        </p>
     </a>
     <a href="{% url 'delete-short-question' question.id %}">
         <button type="button" class="delete-button">Delete</button>
@@ -29,6 +32,9 @@
         <p class="question-created-at">
             {{question.created_at}}
         </p>
+        <p class="question-category">
+            Category: {{question.category}}
+        </p>
     </a>
     <a href="{% url 'delete-essay-question' question.id %}">
         <button type="button" class="delete-button">Delete</button>
@@ -45,6 +51,9 @@
         </p>
         <p class="question-created-at">
             {{question.created_at}}
+        </p>
+        <p class="question-category">
+            Category: {{question.category}}
         </p>
     </a>
     <a href="{% url 'delete-mcq' question.id %}">
