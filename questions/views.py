@@ -4,17 +4,19 @@ from django.shortcuts import render, redirect
 from .models import *
 from .form import *
 
+
 # Create your views here.
 def index(request):
     shortQuestions = ShortQuestion.objects.all().order_by('created_at')
     multiChoiceQuestions = MultiChoiceQuestion.objects.all().order_by('created_at')
     essayQuestions = EssayQuestion.objects.all().order_by('created_at')
     context = {
-        'shortQuestions' : shortQuestions,
-        'essayQuestions' : essayQuestions,
-        'multiChoiceQuestions' : multiChoiceQuestions,
+        'shortQuestions': shortQuestions,
+        'essayQuestions': essayQuestions,
+        'multiChoiceQuestions': multiChoiceQuestions,
     }
     return render(request, 'index.html', context)
+
 
 def addShortQuestion(request):
     form = AddShortQuestion()
@@ -32,6 +34,7 @@ def addShortQuestion(request):
     context = {'form': form}
     return render(request, 'add_short_question.html', context)
 
+
 def addEssayQuestion(request):
     form = AddEssayQuestion()
     if request.method == "POST":
@@ -46,6 +49,7 @@ def addEssayQuestion(request):
             raise
     context = {'form': form}
     return render(request, 'add_essay_question.html', context)
+
 
 def addMCQuestion(request):
     # form = AddMCQuestion(prefix='MCQ')
@@ -85,7 +89,7 @@ def addMCQuestion(request):
             if form.is_valid():
                 question = form.save(commit=False)
                 question.save()
-                return redirect('/add_mcq_add_choice/'+str(question.id))
+                return redirect('/add_mcq_add_choice/' + str(question.id))
         except Exception as e:
             print(e)
             raise
@@ -93,6 +97,7 @@ def addMCQuestion(request):
         'form': form,
     }
     return render(request, 'add_mcq.html', context)
+
 
 def addChoice(request, id):
     choices = Choices.objects.filter(mcq=id)
@@ -105,7 +110,7 @@ def addChoice(request, id):
             choice.mcq = MultiChoiceQuestion(id=id)
             choice.save()
             form = AddChoices()
-            return redirect("/add_mcq_add_choice/"+str(id))
+            return redirect("/add_mcq_add_choice/" + str(id))
     context = {
         'form': form,
         'multiChoiceQuestions': multiChoiceQuestions,
@@ -113,6 +118,7 @@ def addChoice(request, id):
     }
     print(choices)
     return render(request, 'add_mcq_add_choice.html', context)
+
 
 def shortQuestionPage(request, id):
     short_response_form = ShortResponseForm()
@@ -134,28 +140,38 @@ def shortQuestionPage(request, id):
     }
     return render(request, 'ShortQuestion.html', context)
 
+
 def deleteShortQuestion(request, id):
     short_question = ShortQuestion.objects.filter(id=id)
     short_question.delete()
     return redirect("/")
+
+
 def deleteEssayQuestion(request, id):
     essay_question = EssayQuestion.objects.filter(id=id)
     essay_question.delete()
     return redirect("/")
+
+
 def deleteChoice(request, id):
     choice = Choices.objects.get(id=id)
     choice.delete()
-    return redirect("/mcq-question/"+str(choice.mcq.id))
+    return redirect("/mcq-question/" + str(choice.mcq.id))
+
+
 def deleteMCQ(request, id):
     mcq_question = MultiChoiceQuestion.objects.filter(id=id)
     choice = Choices.objects.filter(id=id)
     mcq_question.delete()
     choice.delete()
     return redirect("/")
+
+
 def deleteChoice_amcq(request, id):
     choice = Choices.objects.get(id=id)
     choice.delete()
-    return redirect("/add_mcq_add_choice/"+str(choice.mcq.id))
+    return redirect("/add_mcq_add_choice/" + str(choice.mcq.id))
+
 
 def essayQuestionPage(request, id):
     essay_response_form = EssayResponseForm()
@@ -176,6 +192,8 @@ def essayQuestionPage(request, id):
         'essay_response_form': essay_response_form
     }
     return render(request, 'EssayQuestion.html', context)
+
+
 def MCQuestionPage(request, id):
     mcq_question = MultiChoiceQuestion.objects.get(id=id)
     choices = Choices.objects.filter(mcq=id)
