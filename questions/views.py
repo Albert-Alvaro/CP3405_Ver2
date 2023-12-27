@@ -142,6 +142,10 @@ def deleteEssayQuestion(request, id):
     essay_question = EssayQuestion.objects.filter(id=id)
     essay_question.delete()
     return redirect("/")
+def deleteChoice(request, id):
+    choice = Choices.objects.get(id=id)
+    choice.delete()
+    return redirect("/mcq-question/"+str(choice.mcq.id))
 def deleteMCQ(request, id):
     mcq_question = MultiChoiceQuestion.objects.filter(id=id)
     choice = Choices.objects.filter(id=id)
@@ -169,10 +173,20 @@ def essayQuestionPage(request, id):
     }
     return render(request, 'EssayQuestion.html', context)
 def MCQuestionPage(request, id):
-    choices = Choices.objects.filter(mcq=id)
     mcq_question = MultiChoiceQuestion.objects.get(id=id)
+    choices = Choices.objects.filter(mcq=id)
+    form = AddChoices()
+    if request.method == "POST":
+        form = AddChoices(request.POST)
+        if form.is_valid():
+            choice = form.save(commit=False)
+            choice.mcq = MultiChoiceQuestion(id=id)
+            choice.save()
+            form = AddChoices()
+            return redirect("/mcq-question/" + str(id))
     context = {
         'mcq_question': mcq_question,
-        'choices': choices
+        'choices': choices,
+        'form': form
     }
     return render(request, 'MCQ.html', context)

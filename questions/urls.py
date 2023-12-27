@@ -13,4 +13,5 @@ urlpatterns = [
     path('delete-short-question/<int:id>/', views.deleteShortQuestion, name='delete-short-question'),
     path('delete-essay-question/<int:id>/', views.deleteEssayQuestion, name='delete-essay-question'),
     path('delete-mcq/<int:id>/', views.deleteMCQ, name='delete-mcq'),
+    path('delete-choice/<int:id>/', views.deleteChoice, name='delete-choice'),
 ]

@@ -9,6 +9,56 @@ ol {
     margin-left: 30px;
 }
 
+    .submit-button,
+    .add-choice-button{
+        display: right;
+        justify-content: right;
+            width: 100px;
+            height: 40px;
+            border: none;
+            border-radius: 20px;
+            background-color: black;
+            color: white;
+            margin: 10px auto;
+            cursor: pointer;
+    }
+    .popup {
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.4);
+            display: none;
+            }
+            .popup-content {
+            background-color: white;
+            margin: 10% auto;
+            padding: 20px;
+            border: 1px solid #888888;
+            width: 30%;
+            font-weight: bolder;
+        }
+        .popup-content button {
+            display: block;
+            width: 60px;
+            height: 30px;
+            border: none;
+            border-radius: 20px;
+            background-color: black;
+            color: white;
+            margin: 10px auto;
+            cursor: pointer;
+        }
+        .show {
+            display: block;
+        }
+        h1 {
+            color: green;
+        }
+
 </style>
 <div class="page-mcq-question">
     <h2 class="mcq-question-title">{{mcq_question.question}}</h2>
@@ -19,8 +69,38 @@ ol {
             <ol>
                 <li>{{choice.choice}}</li>
             </ol>
+            <a href="{% url 'delete-choice' choice.id %}">
+                <button type="button" class="delete-button">Delete</button>
+            </a>
             {% endfor %}
+    </div>
+    <button id="myButton" class="add-choice-button">Add Choice</button>
+    <div id="myPopup" class="popup">
+        <div class="popup-content">
+             <form method="POST" action="" class="add-choice">
+                {% csrf_token %}
+                    <div class="field-wrapper">
+                        <label for="{{form.choice.id_for_label}}">Add Choice</label>
+                        {{form.choice}}
+                    </div>
+                <input type="submit" value="Add" class="submit-button">
+            </form>
+            <button id="closePopup" class="close-button">Close</button>
+        </div>
     </div>
 </div>
 
+<script>
+        myButton.addEventListener("click", function () {
+            myPopup.classList.add("show");
+        });
+        closePopup.addEventListener("click", function () {
+            myPopup.classList.remove("show");
+        });
+        window.addEventListener("click", function (event) {
+            if (event.target == myPopup) {
+                myPopup.classList.remove("show");
+            }
+        });
+</script>
 {% endblock %}
