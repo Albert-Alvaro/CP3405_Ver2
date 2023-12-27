@@ -13,6 +13,9 @@
             {{question.created_at}}
         </p>
     </a>
+    <a href="{% url 'delete-short-question' question.id %}">
+        <button type="button" class="delete-button">Delete</button>
+    </a>
 </div>
 {% endfor %}
 
@@ -27,6 +30,9 @@
             {{question.created_at}}
         </p>
     </a>
+    <a href="{% url 'delete-essay-question' question.id %}">
+        <button type="button" class="delete-button">Delete</button>
+    </a>
 </div>
 {% endfor %}
 
@@ -40,6 +46,9 @@
         <p class="question-created-at">
             {{question.created_at}}
         </p>
+    </a>
+    <a href="{% url 'delete-mcq' question.id %}">
+        <button type="button" class="delete-button">Delete</button>
     </a>
 </div>
 {% endfor %}

@@ -127,13 +127,28 @@ def shortQuestionPage(request, id):
         except Exception as e:
             print(e)
             raise
-
     short_question = ShortQuestion.objects.get(id=id)
     context = {
         'short_question': short_question,
         'short_response_form': short_response_form
     }
     return render(request, 'ShortQuestion.html', context)
+
+def deleteShortQuestion(request, id):
+    short_question = ShortQuestion.objects.filter(id=id)
+    short_question.delete()
+    return redirect("/")
+def deleteEssayQuestion(request, id):
+    essay_question = EssayQuestion.objects.filter(id=id)
+    essay_question.delete()
+    return redirect("/")
+def deleteMCQ(request, id):
+    mcq_question = MultiChoiceQuestion.objects.filter(id=id)
+    choice = Choices.objects.filter(id=id)
+    mcq_question.delete()
+    choice.delete()
+    return redirect("/")
+
 def essayQuestionPage(request, id):
     essay_response_form = EssayResponseForm()
     if request.method == "POST":
