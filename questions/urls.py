@@ -1,4 +1,6 @@
 from django.urls import path
+from django.conf import settings
+from django.conf.urls.static import static
 from . import views
 
 urlpatterns = [
@@ -21,5 +23,5 @@ urlpatterns = [
     path('add-short-question-to-category/<int:id>', views.addShortQuestionToCategory,
          name="add-short-question-to-category"),
     path('add-mcq-to-category/<int:id>', views.addMCQToCategory, name="add-mcq-to-category"),
-
+    path('image_upload', views.addEssayQuestion, name='image_upload'),
 ]

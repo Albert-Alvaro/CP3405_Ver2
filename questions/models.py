@@ -30,6 +30,7 @@ class EssayQuestion(models.Model):
     question = models.CharField(max_length=10000)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+    image = models.ImageField(upload_to='images/')
 
     def __str__(self):
         return self.question, self.category

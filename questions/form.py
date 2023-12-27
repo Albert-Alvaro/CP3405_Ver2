@@ -8,7 +8,7 @@ class AddShortQuestion(forms.ModelForm):
 class AddEssayQuestion(forms.ModelForm):
     class Meta:
         model = EssayQuestion
-        fields = ['question']
+        fields = ['question', 'image']
 
 class AddMCQuestion(forms.ModelForm):
     class Meta:

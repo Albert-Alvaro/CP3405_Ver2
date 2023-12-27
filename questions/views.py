@@ -36,7 +36,7 @@ def addEssayQuestion(request):
     form = AddEssayQuestion()
     if request.method == "POST":
         try:
-            form = AddEssayQuestion(request.POST)
+            form = AddEssayQuestion(request.POST, request.FILES)
             if form.is_valid():
                 question = form.save(commit=False)
                 question.save()
