@@ -1,7 +1,11 @@
 from django.db import models
 
 # Create your models here.
+
+class Question(models.Model):
+    category = models.CharField(max_length=1000)
 class MultiChoiceQuestion(models.Model):
+    question_type = models.ForeignKey(Question, null=True, on_delete=models.CASCADE)
     question = models.CharField(max_length=10000)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
@@ -10,6 +14,7 @@ class MultiChoiceQuestion(models.Model):
         return self.question
 
 class ShortQuestion(models.Model):
+    question_type = models.ForeignKey(Question, null=True, on_delete=models.CASCADE)
     question = models.CharField(max_length=10000)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
@@ -18,6 +23,7 @@ class ShortQuestion(models.Model):
         return self.question
 
 class EssayQuestion(models.Model):
+    question_type = models.ForeignKey(Question, null=True, on_delete=models.CASCADE)
     question = models.CharField(max_length=10000)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
