@@ -71,6 +71,9 @@
             <ol>
                 <li>{{choice.choice}}</li>
             </ol>
+            <a href="{% url 'delete-choice-amcq' choice.id %}">
+                <button type="button" class="delete-button">Delete</button>
+            </a>
             {% endfor %}
         </div>
     <button id="myButton" class="add-choice-button">Add Choice</button>

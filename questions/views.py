@@ -152,6 +152,10 @@ def deleteMCQ(request, id):
     mcq_question.delete()
     choice.delete()
     return redirect("/")
+def deleteChoice_amcq(request, id):
+    choice = Choices.objects.get(id=id)
+    choice.delete()
+    return redirect("/add_mcq_add_choice/"+str(choice.mcq.id))
 
 def essayQuestionPage(request, id):
     essay_response_form = EssayResponseForm()
