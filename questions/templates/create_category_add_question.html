@@ -65,13 +65,35 @@
         <div class="field-wrapper">
             <label>Category: </label>
             <h3>{{category.category}}</h3>
+            <label>Questions in Category: </label>
+            {% for  question in shortQuestionsCat %}
+                <div class = "question-items">
+                        <p class="question-item-title">
+                        {{question.question}}
+                        </p>
+                </div>
+            {% endfor %}
+            {% for  question in essayQuestionsCat %}
+                <div class = "question-items">
+                        <p class="question-item-title">
+                        {{question.question}}
+                        </p>
+                </div>
+            {% endfor %}
+            {% for  question in multiChoiceQuestionsCat %}
+                <div class = "question-items">
+                        <p class="question-item-title">
+                        {{question.question}}
+                        </p>
+                </div>
+            {% endfor %}
         </div>
     <div class="dropdown">
         <button class="dropbtn">Short Answer Questions</button>
             <div class="dropdown-content">
                 {% for  question in shortQuestions %}
                 <div class = "question-items">
-                    <a href="{% url 'add-short-question-to-category' category.id %}">
+                    <a href="{% url 'add-short-question-to-category' category.id question.id %}">
                         <p class="question-item-title">
                         {{question.question}}
                         </p>
@@ -85,7 +107,7 @@
             <div class="dropdown-content">
                 {% for  question in essayQuestions %}
                 <div class = "question-items">
-                    <a href="{% url 'add-essay-question-to-category' category.id %}">
+                    <a href="{% url 'add-essay-question-to-category' category.id question.id %}">
                     <p class="question-item-title">
                         {{question.question}}
                         </p>
@@ -99,7 +121,7 @@
             <div class="dropdown-content">
                 {% for  question in multiChoiceQuestions %}
                 <div class = "question-items">
-                    <a href="{% url 'add-mcq-to-category' category.id %}">
+                    <a href="{% url 'add-mcq-to-category' category.id question.id %}">
                         <p class="question-item-title">
                         {{question.question}}
                         </p>

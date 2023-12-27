@@ -14,7 +14,7 @@ class MultiChoiceQuestion(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return self.question, self.category
+        return self.question
 
 class ShortQuestion(models.Model):
     category = models.ForeignKey(Question, null=True, on_delete=models.CASCADE)
@@ -23,17 +23,17 @@ class ShortQuestion(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return self.question, self.category
+        return self.question
 
 class EssayQuestion(models.Model):
     category = models.ForeignKey(Question, null=True, on_delete=models.CASCADE)
     question = models.CharField(max_length=10000)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-    image = models.ImageField(upload_to='images/')
+    image = models.ImageField(upload_to='images/', null=True)
 
     def __str__(self):
-        return self.question, self.category
+        return self.question
 
 class EssayResponse(models.Model):
     question = models.ForeignKey(EssayQuestion, null=False, on_delete=models.CASCADE)

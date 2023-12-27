@@ -19,9 +19,9 @@ urlpatterns = [
     path('delete-choice-amcq/<int:id>/', views.deleteChoice_amcq, name='delete-choice-amcq'),
     path('create-category', views.createCategory, name="create-category"),
     path('create-category-add-question/<int:id>', views.addQuestionToCategory, name="create-category-add-question"),
-    path('add-essay-question-to-category/<int:id>', views.addEssayQuestionToCategory,name="add-essay-question-to-category"),
-    path('add-short-question-to-category/<int:id>', views.addShortQuestionToCategory,
+    path('add-essay-question-to-category/<int:id>/<int:id2>', views.addEssayQuestionToCategory,name="add-essay-question-to-category"),
+    path('add-short-question-to-category/<int:id>/<int:id2>', views.addShortQuestionToCategory,
          name="add-short-question-to-category"),
-    path('add-mcq-to-category/<int:id>', views.addMCQToCategory, name="add-mcq-to-category"),
+    path('add-mcq-to-category/<int:id>/<int:id2>', views.addMCQToCategory, name="add-mcq-to-category"),
     path('image_upload', views.addEssayQuestion, name='image_upload'),
 ]

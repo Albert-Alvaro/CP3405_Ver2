@@ -67,6 +67,7 @@ def addMCQuestion(request):
 def addChoice(request, id):
     choices = Choices.objects.filter(mcq=id)
     multiChoiceQuestions = MultiChoiceQuestion.objects.get(id=id)
+    print(choices)
     form = AddChoices()
     if request.method == "POST":
         form = AddChoices(request.POST)
@@ -182,24 +183,34 @@ def addQuestionToCategory(request, id):
     shortQuestions = ShortQuestion.objects.all()
     essayQuestions = EssayQuestion.objects.all()
     multiChoiceQuestions = MultiChoiceQuestion.objects.all()
+    shortQuestionsCat = ShortQuestion.objects.filter(category=id)
+    essayQuestionsCat = EssayQuestion.objects.filter(category=id)
+    multiChoiceQuestionsCat = MultiChoiceQuestion.objects.filter(category=id)
     category = Question.objects.get(id=id)
+    print(id)
+    print(shortQuestionsCat)
+    print(shortQuestions.values_list('category'))
     context = {
         'shortQuestions': shortQuestions,
         'essayQuestions': essayQuestions,
         'multiChoiceQuestions': multiChoiceQuestions,
+        'shortQuestionsCat':shortQuestionsCat,
+        'essayQuestionsCat':essayQuestionsCat,
+        'multiChoiceQuestionsCat': multiChoiceQuestionsCat,
         'category': category,
     }
     return render(request, 'create_category_add_question.html', context)
 
-def addShortQuestionToCategory(request, id):
+def addShortQuestionToCategory(request, id, id2):
     category = Question.objects.get(id=id)
-
+    question = ShortQuestion.objects.filter(id=id2).update(category=id)
     return redirect("/create-category-add-question/" + str(category.id))
-def addEssayQuestionToCategory(request, id):
+def addEssayQuestionToCategory(request, id, id2):
     category = Question.objects.get(id=id)
-
+    question = EssayQuestion.objects.filter(id=id2).update(category=id)
     return redirect("/create-category-add-question/" + str(category.id))
-def addMCQToCategory(request, id):
+def addMCQToCategory(request, id, id2):
     category = Question.objects.get(id=id)
+    question = MultiChoiceQuestion.objects.filter(id=id2).update(category=id)
 
     return redirect("/create-category-add-question/" + str(category.id))
