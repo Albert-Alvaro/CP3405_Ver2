@@ -1,0 +1,17 @@
+{%  extends 'layouts/page.html' %}
+
+{% block content %}
+
+<div class="create-category-page">
+    <h1 class="title">Create Category</h1>
+    <form method="POST" action="" class="add-mcq-question-form">
+        {%  csrf_token %}
+        <div class="field-wrapper">
+            <label for="{{form.category.id_for_label}}">Category: </label>
+            {{form.category}}
+        </div>
+        <input type="submit" value="Next" class="submit-button">
+    </form>
+</div>
+
+{% endblock %}

@@ -48,36 +48,6 @@ def addEssayQuestion(request):
     return render(request, 'add_essay_question.html', context)
 
 def addMCQuestion(request):
-    # form = AddMCQuestion(prefix='MCQ')
-    # form2 = AddChoices(prefix='choice')
-    # if request.method == 'POST':
-    #     try:
-    #         form = AddMCQuestion(request.POST, prefix='MCQ')
-    #         if form.is_valid():
-    #             question = form.save(commit=False)
-    #             question.save()
-    #             return redirect("/")
-    #         else:
-    #             form = AddMCQuestion(prefix='MCQ')
-    #     except Exception as e:
-    #         print(e)
-    #         raise
-    # if request.method == 'POST' and not form.is_valid():
-    #     try:
-    #         form2 = AddChoices(request.POST, prefix='choice')
-    #         form = AddMCQuestion(prefix='MCQ')
-    #         if form2.is_valid():
-    #             choice = form2.save(commit=False)
-    #             choice.mcq = MultiChoiceQuestion(id=id)
-    #             choice.save()
-    #             form2 = AddChoices()
-    #             return redirect("/add-mcq")
-    #         else:
-    #             form2 = AddChoices(prefix='choice')
-    #             return redirect("/add-mcq")
-    #     except Exception as e:
-    #         print(e)
-    #         raise
     form = AddMCQuestion()
     if request.method == "POST":
         try:
@@ -194,3 +164,42 @@ def MCQuestionPage(request, id):
         'form': form
     }
     return render(request, 'MCQ.html', context)
+
+def createCategory(request):
+    form = CreateCategory()
+    if request.method == "POST":
+        form = CreateCategory(request.POST)
+        if form.is_valid():
+            question = form.save(commit=False)
+            question.save()
+            form = CreateCategory()
+            return redirect("/create-category-add-question/"+ str(question.id))
+    context = {
+        'form': form,
+    }
+    return render(request, 'create_category.html', context)
+def addQuestionToCategory(request, id):
+    shortQuestions = ShortQuestion.objects.all()
+    essayQuestions = EssayQuestion.objects.all()
+    multiChoiceQuestions = MultiChoiceQuestion.objects.all()
+    category = Question.objects.get(id=id)
+    context = {
+        'shortQuestions': shortQuestions,
+        'essayQuestions': essayQuestions,
+        'multiChoiceQuestions': multiChoiceQuestions,
+        'category': category,
+    }
+    return render(request, 'create_category_add_question.html', context)
+
+def addShortQuestionToCategory(request, id):
+    category = Question.objects.get(id=id)
+
+    return redirect("/create-category-add-question/" + str(category.id))
+def addEssayQuestionToCategory(request, id):
+    category = Question.objects.get(id=id)
+
+    return redirect("/create-category-add-question/" + str(category.id))
+def addMCQToCategory(request, id):
+    category = Question.objects.get(id=id)
+
+    return redirect("/create-category-add-question/" + str(category.id))

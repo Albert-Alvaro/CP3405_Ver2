@@ -4,32 +4,35 @@ from django.db import models
 
 class Question(models.Model):
     category = models.CharField(max_length=1000)
+
+    def __str__(self):
+        return self.category
 class MultiChoiceQuestion(models.Model):
-    question_type = models.ForeignKey(Question, null=True, on_delete=models.CASCADE)
+    category = models.ForeignKey(Question, null=True, on_delete=models.CASCADE)
     question = models.CharField(max_length=10000)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return self.question
+        return self.question, self.category
 
 class ShortQuestion(models.Model):
-    question_type = models.ForeignKey(Question, null=True, on_delete=models.CASCADE)
+    category = models.ForeignKey(Question, null=True, on_delete=models.CASCADE)
     question = models.CharField(max_length=10000)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return self.question
+        return self.question, self.category
 
 class EssayQuestion(models.Model):
-    question_type = models.ForeignKey(Question, null=True, on_delete=models.CASCADE)
+    category = models.ForeignKey(Question, null=True, on_delete=models.CASCADE)
     question = models.CharField(max_length=10000)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return self.question
+        return self.question, self.category
 
 class EssayResponse(models.Model):
     question = models.ForeignKey(EssayQuestion, null=False, on_delete=models.CASCADE)

@@ -20,6 +20,11 @@ class AddChoices(forms.ModelForm):
         model = Choices
         fields = ['choice']
 
+class CreateCategory(forms.ModelForm):
+    class Meta:
+        model = Question
+        fields = ['category']
+
 class ShortResponseForm(forms.ModelForm):
     class Meta:
         model = ShortResponse
