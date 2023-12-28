@@ -1,9 +1,12 @@
 from django.db import models
 
+
 # Create your models here.
 
 class Question(models.Model):
     category = models.CharField(max_length=1000)
+
+
 class MultiChoiceQuestion(models.Model):
     question_type = models.ForeignKey(Question, null=True, on_delete=models.CASCADE)
     question = models.CharField(max_length=10000)
@@ -12,6 +15,7 @@ class MultiChoiceQuestion(models.Model):
 
     def __str__(self):
         return self.question
+
 
 class ShortQuestion(models.Model):
     question_type = models.ForeignKey(Question, null=True, on_delete=models.CASCADE)
@@ -22,6 +26,7 @@ class ShortQuestion(models.Model):
     def __str__(self):
         return self.question
 
+
 class EssayQuestion(models.Model):
     question_type = models.ForeignKey(Question, null=True, on_delete=models.CASCADE)
     question = models.CharField(max_length=10000)
@@ -31,11 +36,13 @@ class EssayQuestion(models.Model):
     def __str__(self):
         return self.question
 
+
 class EssayResponse(models.Model):
     question = models.ForeignKey(EssayQuestion, null=False, on_delete=models.CASCADE)
     body = models.TextField(null=False)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+
 
 class ShortResponse(models.Model):
     question = models.ForeignKey(ShortQuestion, null=False, on_delete=models.CASCADE)
@@ -43,9 +50,15 @@ class ShortResponse(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
+
 class Choices(models.Model):
     mcq = models.ForeignKey(MultiChoiceQuestion, null=True, on_delete=models.CASCADE)
     choice = models.CharField(max_length=5000)
 
     def __str__(self):
         return self.choice
+
+
+class Picture(models.Model):
+    name = models.CharField(max_length=30)
+    question_img = models.ImageField(upload_to="images/")

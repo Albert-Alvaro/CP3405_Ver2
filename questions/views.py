@@ -1,8 +1,8 @@
 import random
-
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, HttpResponse
 from .models import *
 from .form import *
+
 
 
 # Create your views here.
@@ -212,3 +212,26 @@ def MCQuestionPage(request, id):
         'form': form
     }
     return render(request, 'MCQ.html', context)
+
+
+def question_image_view(request):
+    if request.method == 'POST':
+        form = PictureForm(request.POST, request.FILES)
+
+        if form.is_valid():
+            form.save()
+            return redirect('success')
+    else:
+        form = PictureForm()
+    return render(request, 'pic_select.html', {'form': form})
+
+
+def success(request):
+    return HttpResponse('successfully uploaded')
+
+
+def display_question_images(request):
+    if request.method == 'GET':
+        questions_img = Picture.objects.all()
+        return render(request, 'display_question_image.html', {"question_images":questions_img})
+
