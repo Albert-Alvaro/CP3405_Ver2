@@ -217,7 +217,7 @@ def MCQuestionPage(request, id):
 def question_image_view(request):
     if request.method == 'POST':
         form = PictureForm(request.POST, request.FILES)
-
+        print(form.get_context())
         if form.is_valid():
             form.save()
             return redirect('success')
@@ -233,5 +233,5 @@ def success(request):
 def display_question_images(request):
     if request.method == 'GET':
         questions_img = Picture.objects.all()
-        return render(request, 'display_question_image.html', {"question_images":questions_img})
+        return render(request, 'display_question_image.html', {"question_images": questions_img})
 

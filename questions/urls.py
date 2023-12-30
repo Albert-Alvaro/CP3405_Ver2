@@ -19,7 +19,8 @@ urlpatterns = [
     path('delete-choice/<int:id>/', views.deleteChoice, name='delete-choice'),
     path('delete-choice-amcq/<int:id>/', views.deleteChoice_amcq, name='delete-choice-amcq'),
     path('image_upload', views.question_image_view, name='image-upload'),
-    path('success', views.success, name='success')
+    path('success', views.success, name='success'),
+    path("img_display", views.display_question_images)
 
 
 ]
