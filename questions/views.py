@@ -267,5 +267,5 @@ def image(request, id):
     question = EssayQuestion.objects.get(id=id)
     print(question.image)
     image = question.image
-    return redirect("/media/" + str(image))
+    return redirect("/media/images/" + str(image))
 # make second function that add a button in essayquestion page and jump to another url to display picture, then that page just have picture and come back to question.

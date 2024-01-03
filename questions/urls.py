@@ -31,6 +31,7 @@ urlpatterns = [
     path('delete-category/<int:id>', views.deleteCategory, name="delete-category"),
     path('category-popup/<int:id>', views.categoryPopup, name="category-popup"),
     # for question id
-    path('media/images/<int:id>.png', views.image, name="image"), 
-    # path('media/images/', views.image, name="image"), for filename
+    path('media/images/<str:request>.png', views.image, name="image"), 
+    # for filename
+    # path('media/images/', views.image, name="image"), 
 ]

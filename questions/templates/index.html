@@ -5,7 +5,8 @@
 <h1 class="title">Short Questions</h1>
 {% for  question in shortQuestions %}
 <div class = "question-items">
-    <a href="{% url 'short-question' question.id %}">
+    <a href="{% url 'short-qu
+    estion' question.id %}">
         <p class="question-item-title">
             {{question.question}}
         </p>

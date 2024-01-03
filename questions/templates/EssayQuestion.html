@@ -43,10 +43,10 @@
     <h2 class="essay-question-title">{{essay_question.question}}</h2>
     <p class="question-date">Created At: {{essay_question.created_at}}</p>
     {% if essay_question.image %}
-      <img src="{% url 'image' essay_question.id %}" style="width: 100%; height: 100%; float: left; margin-right: 10px;">
+      <img src="{% url 'image' essay_question %}" style="width: 100%; height: 100%; float: left; margin-right: 10px;">
       <!-- for quesiton id, the path is media/images/question.id.png-->
-      <!-- <img src="{{essay_question.image}}" style="width: 100%; height: 100%; float: left; margin-right: 10px;"> for filename -->
-      <!-- but the path become essay-question/images/filename.png -->
+      <!-- <img src="{{essay_question.image}}" style="width: 100%; height: 100%; float: left; margin-right: 10px;"> -->
+      <!-- but the path become essay-question/images/filename.png  for filename-->
       <!-- might not need, but change to button -->
     {% endif %}
     <p class="question-category">Category: {{essay_question.category}}</p>
