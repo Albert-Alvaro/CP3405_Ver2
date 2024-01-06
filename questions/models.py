@@ -1,4 +1,5 @@
 from django.db import models
+import os
 
 # Create your models here.
 
@@ -25,12 +26,17 @@ class ShortQuestion(models.Model):
     def __str__(self):
         return self.question
 
+def file_rename(instance, filename):
+    path = "media/images/"
+    filename = "%s.%s" % (instance.question,'png')
+    return os.path.join('images/',filename)
+
 class EssayQuestion(models.Model):
     category = models.ForeignKey(Question, null=True, on_delete=models.CASCADE)
     question = models.CharField(max_length=10000)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-    image = models.ImageField(upload_to='images/', null=True)
+    image = models.ImageField(upload_to=file_rename, null=True)
 
     def __str__(self):
         return self.question

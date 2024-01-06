@@ -133,6 +133,9 @@ def deleteChoice_amcq(request, id):
 def essayQuestionPage(request, id):
     category = Question.objects.all()
     essay_response_form = EssayResponseForm()
+    question = EssayQuestion.objects.get(id=id)
+    print(question.image)
+    image = question.image
     if request.method == "POST":
         try:
             essay_response_form = EssayResponseForm(request.POST)
@@ -148,7 +151,8 @@ def essayQuestionPage(request, id):
     context = {
         'essay_question': essay_question,
         'essay_response_form': essay_response_form,
-        'category': category
+        'category': category,
+        'image': image
     }
     return render(request, 'EssayQuestion.html', context)
 def MCQuestionPage(request, id):
@@ -262,3 +266,10 @@ def categoryPopup(request, id):
         'category': category,
     }
     return render(request, 'CategoryPopup.html', context)
+
+def image(request, id):
+    question = EssayQuestion.objects.get(id=id)
+    print(question.image)
+    image = question.image
+    return redirect("/essay-question/"+ int(question.id))
+# make second function that add a button in essayquestion page and jump to another url to display picture, then that page just have picture and come back to question.

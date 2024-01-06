@@ -30,4 +30,10 @@ urlpatterns = [
     path('category-page', views.categoryPage, name="category-page"),
     path('delete-category/<int:id>', views.deleteCategory, name="delete-category"),
     path('category-popup/<int:id>', views.categoryPopup, name="category-popup"),
+    # for question id
+    # path('media/images/<str:image>', views.image, name="image"), 
+    # for filename
+    # path('media/images/', views.image, name="image"), 
 ]
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
